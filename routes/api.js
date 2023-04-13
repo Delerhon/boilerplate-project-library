@@ -35,7 +35,7 @@ module.exports = function (app) {
     .delete(function(req, res){
       Book.find().deleteMany().exec()
       .then(  (result)  => { res.send('complete delete successfull') })
-      .catch( (error)   => { res.json('error onDeleteAll' }) })
+      .catch( (error)   => { res.json('error onDeleteAll') })
       //if successful response will be 'complete delete successful'
     });
 
