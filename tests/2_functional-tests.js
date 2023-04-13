@@ -200,6 +200,7 @@ suite('Functional Tests', function() {
             .end( (err, res) => {
               assert.equal(res.status, 200)
               assert.equal(res.text, 'no book exists')
+              chai.request(server).delete('/api/books').end()
               done()
             })
         })    
