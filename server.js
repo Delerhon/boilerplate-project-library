@@ -18,6 +18,11 @@ app.use(cors({origin: '*'})); //USED FOR FCC TESTING PURPOSES ONLY!
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.use( (req, res, next) => {
+  console.log(`${req.method} ${req.url}`)
+  
+  next()
+})
 //Index page (static HTML)
 app.route('/')
   .get(function (req, res) {
