@@ -20,6 +20,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use( (req, res, next) => {
   console.log(`${req.method} ${req.url}`)
+  console.log(req.body)
   
   next()
 })

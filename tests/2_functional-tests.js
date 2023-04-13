@@ -151,10 +151,7 @@ suite('Functional Tests', function() {
             .post(`/api/books/${res.body["1"]._id}`)
             .end( (err, res) => {
               assert.equal(res.status, 200)
-              assert.isObject(res.body)
-              assert.propertyVal(res.body, 'title', 'TestBook2')
-              assert.property(res.body, 'comments')
-              assert.equal(res.body.comments[0], 'testComment1');
+              assert.equal(res.text, 'missing required field comment')
               done()
             })
         }); 

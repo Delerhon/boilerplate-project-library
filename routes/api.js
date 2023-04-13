@@ -34,8 +34,8 @@ module.exports = function (app) {
     
     .delete(function(req, res){
       Book.find().deleteMany().exec()
-      .then(  (result)  => { res.json({ result: 'complete delete successfull' }) })
-      .catch( (error)   => { res.json({ error: 'message' }) })
+      .then(  (result)  => { res.send('complete delete successfull') })
+      .catch( (error)   => { res.json('error onDeleteAll' }) })
       //if successful response will be 'complete delete successful'
     });
 
@@ -52,11 +52,12 @@ module.exports = function (app) {
     .post(function(req, res){
       let _id = req.params.id;
       let comments = req.body.comment;
-
-      Book.findOneAndUpdate({ _id }, { $push: { comments: comments } }, { new: true} )
-        .then(  (result)  => { findOneAndSend(result._id, res) })
-        .catch( (error)   => { res.send('no book exists') })
-      
+      if (!comments) { res.send('missing required field comment') }
+      else {
+        Book.findOneAndUpdate({ _id }, { $push: { comments: comments } }, { new: true} )
+          .then(  (result)  => { findOneAndSend(result._id, res) })
+          .catch( (error)   => { res.send('no book exists') })
+      }
       //json res format same as .get
     })
     
